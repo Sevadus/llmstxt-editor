@@ -1,0 +1,131 @@
+---
+// Input section component for file upload and URL input
+---
+
+<section
+  class="bg-[var(--bg-primary)] py-6 px-6 border-b border-[var(--border-color)] flex-shrink-0 shadow-sm"
+>
+  <div class="max-w-5xl mx-auto">
+    <p class="mb-5 text-[var(--text-secondary)]">
+      Load your <code
+        class="bg-[var(--bg-tertiary)] text-[var(--text-secondary)] px-2 py-1 rounded text-sm font-mono"
+        >llms.txt</code
+      > content via URL or file upload.
+    </p>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="modern-card p-5">
+        <h3
+          class="text-sm font-medium text-[var(--text-secondary)] mb-3 flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-4 h-4 mr-2"
+          >
+            <path
+              d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+            ></path>
+            <path
+              d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+            ></path>
+          </svg>
+          Load from URL
+        </h3>
+        <div class="flex gap-2">
+          <input
+            type="url"
+            id="urlInput"
+            placeholder="https://example.com/llms.txt"
+            class="flex-1 min-w-[200px] px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-md text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)] focus:ring-opacity-25 placeholder:text-[var(--text-muted)]"
+          />
+          <button
+            id="fetchUrlButton"
+            class="btn-primary flex items-center justify-center whitespace-nowrap"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4 mr-2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Fetch
+          </button>
+        </div>
+      </div>
+
+      <div class="modern-card p-5">
+        <h3
+          class="text-sm font-medium text-[var(--text-secondary)] mb-3 flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-4 h-4 mr-2"
+          >
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            ></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+          Upload File
+        </h3>
+        <input
+          type="file"
+          id="fileInput"
+          accept=".txt"
+          class="w-full px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-md text-[var(--text-primary)] file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[var(--accent-primary)] file:text-white hover:file:bg-[var(--accent-hover)] file:transition-colors file:cursor-pointer"
+        />
+      </div>
+    </div>
+
+    <div
+      class="mt-5 p-4 bg-[var(--bg-tertiary)] rounded-md border border-[var(--border-color)] text-[var(--text-secondary)]"
+    >
+      <p
+        id="status"
+        class="italic text-[var(--text-muted)] text-sm min-h-[1.6em] flex items-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4 mr-2 animate-spin text-[var(--accent-primary)]"
+        >
+          <line x1="12" y1="2" x2="12" y2="6"></line>
+          <line x1="12" y1="18" x2="12" y2="22"></line>
+          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+          <line x1="2" y1="12" x2="6" y2="12"></line>
+          <line x1="18" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+          <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+        </svg>
+        Initializing...
+      </p>
+    </div>
+  </div>
+</section>

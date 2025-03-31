@@ -1,0 +1,375 @@
+---
+// Header component with dark mode toggle and about popup
+---
+
+<header
+  class="bg-[var(--bg-primary)] py-4 px-6 border-b border-[var(--border-color)] flex justify-between items-center flex-shrink-0 sticky top-0 z-10 backdrop-blur-sm bg-opacity-95"
+>
+  <div class="flex items-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="w-6 h-6 text-[var(--accent-primary)] mr-3"
+    >
+      <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"
+      ></path>
+      <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+    </svg>
+    <h1
+      class="text-xl font-semibold m-0 text-[var(--text-primary)] tracking-tight"
+    >
+      LLMS.txt Editor
+    </h1>
+  </div>
+  <div class="flex items-center gap-3">
+    <button
+      id="aboutButton"
+      class="w-10 h-10 rounded-full border border-[var(--border-color)] flex items-center justify-center transition-all hover:bg-[var(--bg-tertiary)] hover:border-[var(--border-color-hover)] text-[var(--text-primary)]"
+      aria-label="About"
+      title="About LLMS.txt Editor"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-5 h-5"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+    </button>
+    <button
+      id="darkModeToggle"
+      class="w-10 h-10 rounded-full border border-[var(--border-color)] flex items-center justify-center transition-all hover:bg-[var(--bg-tertiary)] hover:border-[var(--border-color-hover)] text-[var(--text-primary)]"
+      aria-label="Toggle Dark Mode"
+      title="Toggle Dark/Light Mode"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-5 h-5"
+      >
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- About Popup -->
+<div
+  id="aboutPopup"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center"
+>
+  <div
+    class="bg-[var(--bg-primary)] rounded-lg shadow-lg max-w-2xl w-full mx-4 overflow-hidden animate-fade-in"
+  >
+    <div class="p-8">
+      <div class="flex justify-between items-start mb-6">
+        <h2
+          class="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-6 h-6 text-[var(--accent-primary)]"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          About LLMS.txt Editor
+        </h2>
+        <button
+          id="closeAboutButton"
+          class="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors p-1 hover:bg-[var(--bg-tertiary)] rounded-full"
+          aria-label="Close"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-5 h-5"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="space-y-6 text-[var(--text-primary)]">
+        <div
+          class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]"
+        >
+          <p class="text-[var(--text-secondary)] leading-relaxed">
+            LLMS.txt Editor is a powerful tool for managing and optimizing your
+            LLMS.txt files. It helps you identify and remove wasteful sections,
+            making your prompts more efficient and cost-effective. A token saved
+            is a token earned. Nothing gets transmitted to any servers while you
+            use this tool so if you see something wrong, submit an issue on
+            <a
+              href="https://github.com/sevadus/llmstxt-editor/issues"
+              class="text-[var(--accent-primary)] hover:underline font-medium"
+              >GitHub</a
+            >.
+          </p>
+        </div>
+
+        <div>
+          <h3
+            class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-5 h-5 text-[var(--accent-primary)]"
+            >
+              <path d="M12 2v20M2 12h20"></path>
+            </svg>
+            How it Works
+          </h3>
+          <ol
+            class="list-decimal list-inside space-y-2 text-[var(--text-secondary)]"
+          >
+            <li>Load your LLMS.txt file via URL or file upload</li>
+            <li>
+              The editor analyzes your content and identifies duplicate sections
+            </li>
+            <li>
+              View token counts for each section to understand their impact
+            </li>
+            <li>Select which sections to keep or remove</li>
+            <li>Export your optimized LLMS.txt file</li>
+          </ol>
+        </div>
+
+        <div>
+          <h3
+            class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-5 h-5 text-[var(--accent-primary)]"
+            >
+              <path d="M12 2v20M2 12h20"></path>
+            </svg>
+            About Tokens
+          </h3>
+          <div
+            class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]"
+          >
+            <p class="text-[var(--text-secondary)] leading-relaxed">
+              Tokens are the basic units that language models use to process
+              text. Each token represents a piece of text, typically a word or
+              part of a word. The fewer tokens you use, the more efficient and
+              cost-effective your prompts become.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h3
+            class="text-lg font-semibold text-[var(--text-primary)] mb-3 flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-5 h-5 text-[var(--accent-primary)]"
+            >
+              <path d="M12 2v20M2 12h20"></path>
+            </svg>
+            Features
+          </h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <li class="flex items-center gap-2 text-[var(--text-secondary)]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4 text-[var(--accent-primary)]"
+              >
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+              Real-time token counting
+            </li>
+            <li class="flex items-center gap-2 text-[var(--text-secondary)]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4 text-[var(--accent-primary)]"
+              >
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+              Duplicate section detection
+            </li>
+            <li class="flex items-center gap-2 text-[var(--text-secondary)]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4 text-[var(--accent-primary)]"
+              >
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+              Interactive tree view
+            </li>
+            <li class="flex items-center gap-2 text-[var(--text-secondary)]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4 text-[var(--accent-primary)]"
+              >
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+              Dark/Light mode support
+            </li>
+            <li class="flex items-center gap-2 text-[var(--text-secondary)]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4 text-[var(--accent-primary)]"
+              >
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+              Export to a new LLMS.txt file
+            </li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-[var(--border-color)]">
+          <p class="text-center text-[var(--text-secondary)]">
+            Made with ❤️ by <a
+              href="https://github.com/sevadus"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--accent-primary)] hover:underline font-medium"
+              >Matt</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dark mode toggle functionality
+  const darkModeToggleButton = document.getElementById("darkModeToggle");
+  const aboutButton = document.getElementById("aboutButton");
+  const aboutPopup = document.getElementById("aboutPopup");
+  const closeAboutButton = document.getElementById("closeAboutButton");
+
+  if (darkModeToggleButton) {
+    // Set initial state based on current theme
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    updateThemeIcon(currentTheme || "light");
+
+    darkModeToggleButton.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const isDark = currentTheme === "dark";
+      document.documentElement.setAttribute(
+        "data-theme",
+        isDark ? "light" : "dark"
+      );
+      updateThemeIcon(isDark ? "light" : "dark");
+      localStorage.setItem("theme", isDark ? "light" : "dark");
+    });
+  }
+
+  function updateThemeIcon(theme: string): void {
+    if (!darkModeToggleButton) return;
+
+    const icon = darkModeToggleButton.querySelector("svg");
+    if (!icon) return;
+
+    if (theme === "dark") {
+      icon.innerHTML = `<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>`;
+    } else {
+      icon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+    }
+  }
+
+  // About popup functionality
+  if (aboutButton && aboutPopup && closeAboutButton) {
+    aboutButton.addEventListener("click", () => {
+      aboutPopup.classList.remove("hidden");
+      aboutPopup.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    });
+
+    closeAboutButton.addEventListener("click", () => {
+      aboutPopup.classList.remove("flex");
+      aboutPopup.classList.add("hidden");
+      document.body.style.overflow = "";
+    });
+
+    aboutPopup.addEventListener("click", (e) => {
+      if (e.target === aboutPopup) {
+        aboutPopup.classList.remove("flex");
+        aboutPopup.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+    });
+  }
+</script>

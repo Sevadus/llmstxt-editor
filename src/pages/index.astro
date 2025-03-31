@@ -1,25 +1,19 @@
 ---
-import '../styles/global.css';
-// Component Imports
-import Button from '../components/Button.astro';
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+import Header from "../components/Header.astro";
+import InputSection from "../components/InputSection.astro";
+import SidebarSummary from "../components/SidebarSummary.astro";
+import TreeView from "../components/TreeView.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro + TailwindCSS</title>
-	</head>
+<Layout title="LLMS.txt Editor">
+  <Header />
+  <InputSection />
 
-	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
-	</body>
-</html>
+  <div class="flex flex-col sm:flex-row flex-grow overflow-hidden">
+    <SidebarSummary />
+    <TreeView />
+  </div>
+
+  <script src="/editor.js" is:inline></script>
+</Layout>
