@@ -1,23 +1,22 @@
 # LLMS.txt Editor
 
-A powerful tool for managing and optimizing your LLMS.txt files. It helps you identify and remove duplicate sections, making your prompts more efficient and cost-effective.
+Get rid of all the stuff you don't need from those [llms.txt](https://llmstxt.org/) files. Don't pay for tokens you're not using!
 
 ## Features
 
-- 🔄 Real-time token counting
-- 🔍 Duplicate section detection
-- 🌳 Interactive tree view
-- 🌓 Dark/Light mode support
-- 💾 Export to a new LLMS.txt file
-- 🔒 Privacy-focused (all processing happens locally)
+- Real-time token counting
+- Duplicate section detection (if you don't want "Examples" for every section, just uncheck the box for all "Examples", for example)
+- Interactive tree view - Decide what you do/don't want in your documentation
+- Export to a new llms.txt file - I sure hope so or what's the point?
+- All processing happens locally, I don't want your tokens either
 
 ## How it Works
 
-1. Load your LLMS.txt file via URL or file upload
+1. Load your llms.txt file via URL or file upload
 2. The editor analyzes your content and identifies duplicate sections
 3. View token counts for each section to understand their impact
 4. Select which sections to keep or remove
-5. Export your optimized LLMS.txt file
+5. Export your optimized llms.txt file
 
 ## About Tokens
 
@@ -27,9 +26,9 @@ Tokens are the basic units that language models use to process text. Each token 
 
 This project is built with:
 
-- [Astro](https://astro.build) - The web framework for content-driven websites
-- [Tailwind CSS](https://tailwindcss.com) - A utility-first CSS framework
-- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- [Astro](https://astro.build)
+- [Tailwind CSS](https://tailwindcss.com)
+- [TypeScript](https://www.typescriptlang.org/)
 
 ### Getting Started
 
@@ -60,7 +59,7 @@ pnpm build
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
