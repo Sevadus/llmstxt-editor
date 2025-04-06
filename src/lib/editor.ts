@@ -13,6 +13,7 @@ import {
   updateParentIndeterminateStates,
   updateStatus,
   updateTokenCounts,
+  updateDuplicateMasterCheckboxState, // Added import
 } from "./ui-utils";
 
 // Add type declaration for window.editorDebug
@@ -156,6 +157,12 @@ export class LLMSEditor {
     const exportButton = document.getElementById("export-button");
     if (exportButton) {
       exportButton.addEventListener("click", this.handleExport.bind(this));
+    }
+
+    // Copy to clipboard
+    const copyButton = document.getElementById("copy-button");
+    if (copyButton) {
+      copyButton.addEventListener("click", this.handleCopy.bind(this));
     }
 
     // Tree container (for delegate events)
@@ -502,6 +509,52 @@ export class LLMSEditor {
       "success"
     );
   }
+  /**
+   * Handle copy to clipboard event
+   */
+  private async handleCopy(): Promise<void> {
+    const { isProcessing, parsedSections } = editorStore.getState();
+
+    if (isProcessing) {
+      updateStatus("Still processing, please wait.", "info");
+      return;
+    }
+
+    if (!parsedSections || parsedSections.length === 0) {
+      updateStatus("No data to copy.", "error");
+      return;
+    }
+
+    let outputContent = "";
+    let sectionsIncludedCount = 0;
+    let finalTokenCount = 0; // Keep track for potential status message
+
+    parsedSections.forEach((section) => {
+      if (section.checkbox && section.checkbox.checked) {
+        sectionsIncludedCount++;
+        finalTokenCount += section.exclusiveTokenCount;
+        const heading = `${"#".repeat(section.level)} ${section.title}\n`;
+        outputContent += heading;
+        outputContent += section.content.join("\n") + "\n\n";
+      }
+    });
+
+    outputContent = outputContent.trimEnd() + "\n";
+
+    if (sectionsIncludedCount === 0) {
+      updateStatus("No sections selected to copy.", "error");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(outputContent);
+      updateStatus(`Copied ${sectionsIncludedCount.toLocaleString()} sections to clipboard.`, "success");
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+      updateStatus("Failed to copy text to clipboard.", "error");
+    }
+  }
+
 
   /**
    * Handle tree click event
