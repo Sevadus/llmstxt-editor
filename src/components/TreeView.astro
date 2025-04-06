@@ -24,6 +24,12 @@
       </svg>
       Select Sections to Include
     </h2>
+    <input
+      type="search"
+      id="tree-search"
+      placeholder="Search sections..."
+      class="mt-3 w-full px-3 py-2 rounded border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)] placeholder-[var(--text-muted)] text-sm"
+    />
   </div>
 
   <div
@@ -54,3 +60,99 @@
     </div>
   </div>
 </main>
+
+<script>
+  const searchInput = document.getElementById('tree-search') as HTMLInputElement;
+  const treeContainer = document.getElementById('tree-container');
+
+  if (searchInput && treeContainer) {
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      filterTree(searchTerm);
+    });
+  }
+
+  function filterTree(searchTerm: string) {
+    if (!treeContainer) return;
+
+    // Select all section items (adjust selector based on actual rendered structure)
+    const allItems = treeContainer.querySelectorAll<HTMLElement>('.tree-item'); // Use correct selector
+
+    if (searchTerm === '') {
+      // Show all items if search is empty
+      allItems.forEach(item => {
+        item.style.display = '';
+        // Ensure parents are also visible if they were hidden
+        // Use nullish coalescing to ensure type Element | null
+        let parentElement: Element | null = item.parentElement?.closest('.tree-item') ?? null;
+        while (parentElement) {
+          // Check if parentElement is indeed an HTMLElement before accessing style
+          if (parentElement instanceof HTMLElement) {
+              parentElement.style.display = '';
+          }
+          // Find next parent, ensuring type Element | null
+          const nextParent = parentElement.parentElement?.closest('.tree-item') ?? null;
+          parentElement = nextParent === parentElement ? null : nextParent; // Avoid infinite loop
+        }
+      });
+      console.log('Search cleared, showing all.');
+      return;
+    }
+
+    console.log(`Filtering for: "${searchTerm}"`);
+
+    // --- Filtering Logic ---
+    // 1. Hide all items initially.
+    allItems.forEach(item => item.style.display = 'none');
+
+    // 2. Iterate through all items to find matches.
+    const matchedItems: HTMLElement[] = [];
+    allItems.forEach(item => {
+      const header = item.querySelector<HTMLElement>('.section-title'); // Use correct selector
+      if (header) {
+        const headerText = header.textContent?.toLowerCase() || '';
+        if (headerText.includes(searchTerm)) {
+          matchedItems.push(item);
+        }
+      }
+    });
+
+    // 3. Show matched items and their ancestors.
+    matchedItems.forEach(item => {
+      let current: HTMLElement | null = item;
+      while (current && current !== treeContainer) {
+        if (current.classList.contains('tree-item')) {
+           current.style.display = '';
+        }
+        // Move up to the parent element that is also a section item, or stop if we hit the container
+        // Explicitly type parentEl
+        const parentEl: HTMLElement | null = current.parentElement;
+        // Remove generic from closest, check type after
+        // Use nullish coalescing to ensure type Element | null
+        const closestParentEl: Element | null = parentEl ? (parentEl.closest('.tree-item') ?? null) : null;
+        // Ensure it's an HTMLElement before assigning
+        const parentListItem: HTMLElement | null = (closestParentEl instanceof HTMLElement) ? closestParentEl : null;
+
+        current = parentListItem === current ? null : parentListItem; // Avoid infinite loop if closest returns self
+         // If closest returns null or the container itself, stop traversing up
+         if (!current || current === treeContainer) break;
+      }
+    });
+
+    console.log(`Found ${matchedItems.length} direct matches.`);
+    if (matchedItems.length === 0) {
+        console.log("No matches found.");
+        // Optionally display a "No results" message within treeContainer
+    }
+
+    // Note: This logic assumes a nested structure where '.tree-item' elements
+    // contain other '.tree-item' elements. The selectors '.tree-item' and
+    // '.section-title' must match the actual output of dom-rendering.ts.
+  }
+
+  // We need to know the exact structure rendered by dom-rendering.ts
+  // to correctly select items and headers and manage visibility.
+  // The correct selectors are '.tree-item' for the main container of a section
+  // and '.section-title' for the element containing the searchable text.
+  // The filtering logic now attempts to preserve hierarchy by walking up the DOM.
+</script>
